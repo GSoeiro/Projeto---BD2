@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Home</title>
+</head>
+<body>
+    <form action="{% url 'criarAutomovelBD' %}" method="POST" class="mt-5">
+        {% csrf_token %}
+        <h2>Inserir Automovel</h2>
+        <label>VIN do Automovel</label>
+        <input type="number" name="vin" id="vin">
+        <br>
+        <label>ID Seguradora</label>
+        <input type="number" name="id_seguradora" id="id_seguradora">
+        <br>
+        <label>NIF da Seguradora</label>
+        <input type="number" name="nif_seguradora" id="nif_seguradora">
+        <br>
+        <label>ID Utilizador</label>
+        <input type="number" name="id_utilizador" id="id_utilizador">
+        <br>
+        <label>NIF</label>
+        <input type="number" name="nif" id="nif">
+        <br>
+        <label>Marca</label>
+        <input type="text" name="marca" id="marca">
+        <br>
+        <label>Modelo</label>
+        <input type="text" name="modelo" id="modelo">
+        <br>
+        <label>Ano</label>
+        <input type="number" name="ano" id="ano">
+        <br>
+        <label>Quilometragem</label>
+        <input type="number" name="quilometragem" id="quilometragem">
+        <br>
+        <label>Preço</label>
+        <input type="number" name="preco" id="preco">
+        <br>
+        <label>Estado</label>
+        <input type="text" name="estado" id="estado">
+        <br>
+        <label>Cor</label>
+        <input type="text" name="cor" id="cor">
+        <br>
+        <label>Extras</label>
+        <input type="text" name="extras" id="extras">
+        <br>
+        <label>Imagem</label>
+        <input type="text" name="imagem" id="imagem">
+        <br>
+        <button type="submit" class="btn btn-success my-3">Submit</button>
+    </form>
+    {% if success %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Message successfully sent!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Ver</button>
+        </div>
+    {% endif %}
+</body>
+</html>

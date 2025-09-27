@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Inserir Fatura</title>
+</head>
+<body>
+    <form action="{% url 'criarFaturaBD' %}" method="POST" class="mt-5">
+        {% csrf_token %}
+        <h2>Inserir Fatura</h2>
+
+        <label>ID Venda</label>
+        <input type="number" name="id_venda" id="id_venda" required>
+        <br>
+
+        <label>Data da Fatura</label>
+        <input type="datetime-local" name="data_fatura" id="data_fatura">
+        <br>
+
+        <label>Forma de Pagamento</label>
+        <input type="text" name="forma_pagamento" id="forma_pagamento">
+        <br>
+
+        <button type="submit" class="btn btn-success my-3">Submit</button>
+    </form>
+
+    {% if success %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Fatura criada com sucesso!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+</body>
+</html>

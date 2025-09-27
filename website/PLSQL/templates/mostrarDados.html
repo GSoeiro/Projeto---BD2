@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mostrar Dados</title>
+</head>
+<body>
+    <h2>Automóveis</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>VIN</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+        </tr>
+        {% for auto in automovel %}
+        <tr>
+            <td>{{ auto.id_automovel }}</td>
+            <td>{{ auto.vin }}</td>
+            <td>{{ auto.marca }}</td>
+            <td>{{ auto.modelo }}</td>
+            <td>{{ auto.ano }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">Nenhum automóvel encontrado.</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Seguradoras</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>NIF</th>
+            <th>Nome</th>
+            <th>Email</th>
+        </tr>
+        {% for seg in seguradora %}
+        <tr>
+            <td>{{ seg.id_seguradora }}</td>
+            <td>{{ seg.nif_seguradora }}</td>
+            <td>{{ seg.nome }}</td>
+            <td>{{ seg.email }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">Nenhuma seguradora encontrada.</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Faturas</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>ID Venda</th>
+            <th>Data</th>
+            <th>Forma de Pagamento</th>
+        </tr>
+        {% for fat in fatura %}
+        <tr>
+            <td>{{ fat.id_fatura }}</td>
+            <td>{{ fat.id_venda }}</td>
+            <td>{{ fat.data_fatura }}</td>
+            <td>{{ fat.forma_pagamento }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">Nenhuma fatura encontrada.</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
