@@ -1,7 +1,6 @@
-# Create your views here
 from django.shortcuts import render
 from django.db import connection
-from .models import TipoUtilizador, Utilizador, Seguradora, Automovel, Colaborador, Fatura, Venda
+from .models import Seguradora, Automovel, Fatura
 from datetime import datetime 
 
 def home(request):
@@ -111,11 +110,15 @@ def criarAutomovelBD(request):
 
 
 def mostrarDadosBD(request):
-    context = {
-        'automovel': Automovel.objects.all(),
-        'seguradora': Seguradora.objects.all(),
-        'fatura': Fatura.objects.all()
-    }
-    return render(request, 'mostrar.html', context)
+    automovel = Automovel.objects.all()
+    seguradora = Seguradora.objects.all()
+    fatura = Fatura.objects.all()
+
+    return render(request, 'mostrarDados.html', {
+        'automoveis': automovel,
+        'seguradoras': seguradora,
+        'faturas': fatura
+    })
+
 
 

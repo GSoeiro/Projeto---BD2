@@ -14,7 +14,7 @@
             <th>Modelo</th>
             <th>Ano</th>
         </tr>
-        {% for auto in automovel %}
+        {% for auto in automoveis %}
         <tr>
             <td>{{ auto.id_automovel }}</td>
             <td>{{ auto.vin }}</td>
@@ -35,7 +35,7 @@
             <th>Nome</th>
             <th>Email</th>
         </tr>
-        {% for seg in seguradora %}
+        {% for seg in seguradoras %}
         <tr>
             <td>{{ seg.id_seguradora }}</td>
             <td>{{ seg.nif_seguradora }}</td>
@@ -55,7 +55,7 @@
             <th>Data</th>
             <th>Forma de Pagamento</th>
         </tr>
-        {% for fat in fatura %}
+        {% for fat in faturas %}
         <tr>
             <td>{{ fat.id_fatura }}</td>
             <td>{{ fat.id_venda }}</td>
