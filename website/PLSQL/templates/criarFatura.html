@@ -1,74 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Mostrar Dados</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Inserir Fatura</title>
 </head>
 <body>
-    <form action="{% url 'mostrarDadosBD' %}" method="GET" class="mt-3">
-        <button type="submit" class="btn btn-primary">Mostrar Dados</button>
+    <form action="{% url 'criarFaturaBD' %}" method="POST" class="mt-5">
+        {% csrf_token %}
+        <h2>Inserir Fatura</h2>
+
+        <label>ID Venda</label>
+        <input type="number" name="id_venda" id="id_venda" required>
+        <br>
+
+        <label>Data da Fatura</label>
+        <input type="datetime-local" name="data_fatura" id="data_fatura">
+        <br>
+
+        <label>Forma de Pagamento</label>
+        <input type="text" name="forma_pagamento" id="forma_pagamento">
+        <br>
+
+        <button type="submit" class="btn btn-success my-3">Submit</button>
     </form>
 
-    <h2>Automóveis</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>VIN</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Ano</th>
-        </tr>
-        {% for auto in automoveis %}
-        <tr>
-            <td>{{ auto.id_automovel }}</td>
-            <td>{{ auto.vin }}</td>
-            <td>{{ auto.marca }}</td>
-            <td>{{ auto.modelo }}</td>
-            <td>{{ auto.ano }}</td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="5">Nenhum automóvel encontrado.</td></tr>
-        {% endfor %}
-    </table>
+    {% if success %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Fatura criada com sucesso!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
 
-    <h2>Seguradoras</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>NIF</th>
-            <th>Nome</th>
-            <th>Email</th>
-        </tr>
-        {% for seg in seguradoras %}
-        <tr>
-            <td>{{ seg.id_seguradora }}</td>
-            <td>{{ seg.nif_seguradora }}</td>
-            <td>{{ seg.nome }}</td>
-            <td>{{ seg.email }}</td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="4">Nenhuma seguradora encontrada.</td></tr>
-        {% endfor %}
-    </table>
-
-    <h2>Faturas</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>ID Venda</th>
-            <th>Data</th>
-            <th>Forma de Pagamento</th>
-        </tr>
-        {% for fat in faturas %}
-        <tr>
-            <td>{{ fat.id_fatura }}</td>
-            <td>{{ fat.id_venda_id }}</td>
-            <td>{{ fat.data_fatura }}</td>
-            <td>{{ fat.forma_pagamento }}</td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="4">Nenhuma fatura encontrada.</td></tr>
-        {% endfor %}
-    </table>
+    {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
 </body>
 </html>
