@@ -18,6 +18,8 @@ def criarFatura(request):
 def mostrarDados(request):
  return render(request, 'mostrarDados.html')
 
+#Função para criar uma seguradora
+
 def criarSeguradoraBD(request):
     if request.method == 'POST':
         nif_seguradora = int(request.POST.get('nif_seguradora', 0))
@@ -39,7 +41,7 @@ def criarSeguradoraBD(request):
 
     return render(request, 'home.html', {'success': False, 'error': 'Método inválido.'})
 
-
+#Função para criar uma fatura
 
 def criarFaturaBD(request):
     if request.method == 'POST':
@@ -64,6 +66,8 @@ def criarFaturaBD(request):
 
     return render(request, 'home.html', {'success': False, 'error': 'Método inválido.'})
 
+#Função para criar um automóvel
+
 def criarAutomovelBD(request):
     if request.method == 'POST':
         vin = int(request.POST.get('vin', 0))
@@ -86,22 +90,7 @@ def criarAutomovelBD(request):
                 """
                 CALL criar_automovel(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
                 """,
-                [
-                    vin,
-                    id_seguradora,
-                    nif_seguradora,
-                    id_utilizador,
-                    nif,
-                    marca,
-                    modelo,
-                    ano,
-                    quilometragem,
-                    preco,
-                    estado,
-                    cor,
-                    extras,
-                    imagem
-                ]
+                [vin, id_seguradora, nif_seguradora,id_utilizador, nif, marca, modelo, ano, quilometragem, preco, estado, cor, extras, imagem]    
             )
 
         return render(request, 'home.html', {'success': True})
