@@ -1,1 +1,4 @@
-Grupo 11, constituído pelos alunos Guilherme Soeiro e Tiago Nunes com os números mecanográficos 25210 & 25185 respetivamente.
+a) Grupo 11
+b) Guilherme Soeiro - 25210
+   Tiago Nunes - 25185
+c) Venda de automóveis
