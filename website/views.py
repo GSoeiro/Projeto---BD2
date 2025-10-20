@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db import connection
-from .models import Seguradora, Automovel, Fatura
-from datetime import datetime 
+from .models import Seguradora, Automovel, Fatura, TipoUtilizador, Utilizador
+from datetime import datetime , date
 
 def home(request):
  return render(request, 'home.html')
@@ -14,6 +14,15 @@ def criarSeguradora(request):
 
 def criarFatura(request):
  return render(request, 'criarFatura.html')
+
+def criarManutencao(request):
+ return render(request, 'criarManutencao.html')
+
+def criarTipoUtilizador(request):
+ return render(request, 'criarTipoUtilizador.html')
+
+def criarUtilizador(request):
+    return render(request, 'criarUtilizador.html')
 
 def mostrarDados(request):
  return render(request, 'mostrarDados.html')
@@ -98,15 +107,78 @@ def criarAutomovelBD(request):
     return render(request, 'home.html', {'success': False, 'error': 'Método inválido.'})
 
 
+#Função para criar um tipo de utilizador
+
+def criarTipoUtilizadorBD(request):
+    if request.method == 'POST':
+        descricao = request.POST.get('descricao')
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                CALL criar_tipo_utilizador(%s);
+                """,
+                [descricao]
+            )
+
+        return render(request, 'home.html', {'success': True})
+
+    return render(request, 'home.html', {'success': False, 'error': 'Método inválido.'})
+
+#Função para criar um utilizador
+
+def criarUtilizadorBD(request):
+    if request.method == 'POST':
+        # Obter os campos do formulário
+        nif = int(request.POST.get('nif', 0))
+        id_tipo_utilizador = int(request.POST.get('id_tipo_utilizador', 0))
+        nome = request.POST.get('nome')
+        morada = request.POST.get('morada')
+        email = request.POST.get('email')
+        palavrapasse = request.POST.get('palavrapasse')
+        datacriacao_str = request.POST.get('data_criacao')  # vem como string
+        estado = request.POST.get('estado')
+
+        # Converter a data (string) para objeto date (sem hora)
+        if datacriacao_str:
+            try:
+                # Aceita tanto 'YYYY-MM-DD' como 'YYYY-MM-DDTHH:MM'
+                datacriacao = datetime.fromisoformat(datacriacao_str).date()
+            except ValueError:
+                datacriacao = date.fromisoformat(datacriacao_str)
+        else:
+            datacriacao = None
+
+        # Executar procedure no PostgreSQL
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                CALL criar_utilizador(%s, %s, %s, %s, %s, %s, %s, %s);
+                """,
+                [nif, id_tipo_utilizador, nome, morada, email, palavrapasse, datacriacao, estado]
+            )
+
+        # Volta para a home com mensagem de sucesso
+        return render(request, 'home.html', {'success': True})
+
+    # Caso não seja POST
+    return render(request, 'home.html', {'success': False, 'error': 'Método inválido.'})
+
+#Função para mostrar os dados
+
 def mostrarDadosBD(request):
     automovel = Automovel.objects.all()
     seguradora = Seguradora.objects.all()
     fatura = Fatura.objects.all()
+    tipo_utilizador = TipoUtilizador.objects.all()
+    utilizador = Utilizador.objects.all()
 
     return render(request, 'mostrarDados.html', {
         'automoveis': automovel,
         'seguradoras': seguradora,
-        'faturas': fatura
+        'faturas': fatura,
+        'tipos_utilizadores': tipo_utilizador,
+        'utilizadores': utilizador
     })
 
 

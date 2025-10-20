@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Inserir Utilizador</title>
+</head>
+<body>
+    <form action="{% url 'criarUtilizadorBD' %}" method="POST" class="mt-5">
+        {% csrf_token %}
+        <h2>Inserir Utilizador</h2>
+
+        <label>NIF</label>
+        <input type="number" name="nif" id="nif" required>
+        <br>
+
+        <label>ID Tipo Utilizador</label>
+        <input type="number" name="id_tipo_utilizador" id="id_tipo_utilizador" required>
+        <br>
+
+        <label>Nome</label>
+        <input type="text" name="nome" id="nome" required>
+        <br>
+
+        <label>Morada</label>
+        <input type="text" name="morada" id="morada">
+        <br>
+
+        <label>Email</label>
+        <input type="email" name="email" id="email" required>
+        <br>
+
+        <label>Palavra-passe</label>
+        <input type="password" name="palavrapasse" id="palavrapasse" required>
+        <br>
+
+        <label>Data de Criação</label>
+        <input type="date" name="data_criacao" id="data_criacao">
+        <br>
+
+        <label>Estado</label>
+        <input type="text" name="estado" id="estado" value="Ativo">
+        <br>
+
+        <button type="submit" class="btn btn-success my-3">Submit</button>
+    </form>
+
+    {% if success %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Utilizador criado com sucesso!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+</body>
+</html>

@@ -18,7 +18,7 @@ class Utilizador(models.Model):
     nome = models.CharField(max_length=200)
     morada = models.CharField(max_length=255, null=True, blank=True)
     email = models.CharField(max_length=200, unique=True)
-    password = models.CharField(max_length=200)
+    palavrapasse = models.CharField(max_length=200)
     data_criacao = models.DateField(auto_now_add=True)
     estado = models.CharField(max_length=50, default='Ativo')
 
@@ -118,3 +118,4 @@ class Fatura(models.Model):
     class Meta:
         db_table = 'fatura'
         managed = False
+

@@ -13,9 +13,7 @@
                 <th>ID</th>
                 <th>VIN</th>
                 <th>ID Seguradora</th>
-                <th>NIF Seguradora</th>
                 <th>ID Utilizador</th>
-                <th>NIF Utilizador</th>
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Ano</th>
@@ -30,9 +28,7 @@
                 <td>{{ auto.id_automovel }}</td>
                 <td>{{ auto.vin }}</td>
                 <td>{{ auto.id_seguradora_id }}</td>
-                <td>{{ auto.nif_seguradora }}</td>
                 <td>{{ auto.id_utilizador_id }}</td> 
-                <td>{{ auto.nif_utilizador_id }}</td>
                 <td>{{ auto.marca }}</td>
                 <td>{{ auto.modelo }}</td>
                 <td>{{ auto.ano }}</td>
@@ -86,6 +82,47 @@
             <tr><td colspan="4">Nenhuma fatura encontrada.</td></tr>
             {% endfor %}
         </table>
+
+        <h2>Tipo de Utilizadores</h2>
+        <table border="1">
+            <tr>
+                <th>ID_Tipo_Utilizador</th>
+                <th>Descrição</th>
+            </tr>
+            {% for tipo in tipos_utilizadores %}
+            <tr>
+                <td>{{ tipo.id_tipo_utilizador }}</td>
+                <td>{{ tipo.descricao }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="2">Nenhum tipo de utilizador encontrado.</td></tr>
+            {% endfor %}
+        </table>
+
+        <h2>Utilizadores</h2>
+        <table border="1">
+            <tr>
+                <th>NIF</th>
+                <th>ID Tipo Utilizador</th>
+                <th>Nome</th>
+                <th>Morada</th>
+                <th>Email</th>
+                <th>Data de Criação</th>
+                <th>Estado</th>
+            </tr>
+            {% for util in utilizadores %}
+            <tr>
+                <td>{{ util.nif }}</td>
+                <td>{{ util.id_tipo_utilizador_id }}</td>
+                <td>{{ util.nome }}</td>
+                <td>{{ util.morada }}</td>
+                <td>{{ util.email }}</td>
+                <td>{{ util.data_criacao }}</td>
+                <td>{{ util.estado }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7">Nenhum utilizador encontrado.</td></tr>
+            {% endfor %}
     </form>
 </body>
 </html>
