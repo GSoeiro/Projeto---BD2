@@ -41,8 +41,8 @@ def criarSeguradoraBD(request):
         with connection.cursor() as cursor:
             cursor.execute(
                 """
-                CALL criar_seguradora(%s, %s, %s, %s, %s, %s);
-                """,
+                CALL criar_seguradora(%s, %s, %s, %s, %s, %s); 
+                """, #Não esquecer que os %s significa placeholder seguro e a conversão é feita automaticamente
                 [nif_seguradora, nome, morada, contacto, website, email]
             )
 
@@ -81,9 +81,6 @@ def criarAutomovelBD(request):
     if request.method == 'POST':
         vin = int(request.POST.get('vin', 0))
         id_seguradora = int(request.POST.get('id_seguradora', 0)) or None
-        nif_seguradora = int(request.POST.get('nif_seguradora', 0)) or None
-        id_utilizador = int(request.POST.get('id_utilizador', 0))
-        nif = int(request.POST.get('nif', 0))
         marca = request.POST.get('marca')
         modelo = request.POST.get('modelo')
         ano = int(request.POST.get('ano', 0))
@@ -99,7 +96,7 @@ def criarAutomovelBD(request):
                 """
                 CALL criar_automovel(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
                 """,
-                [vin, id_seguradora, nif_seguradora,id_utilizador, nif, marca, modelo, ano, quilometragem, preco, estado, cor, extras, imagem]    
+                [vin, id_seguradora, None, None, None, marca, modelo, ano, quilometragem, preco, estado, cor, extras, imagem]
             )
 
         return render(request, 'home.html', {'success': True})
@@ -149,7 +146,6 @@ def criarUtilizadorBD(request):
         else:
             datacriacao = None
 
-        # Executar procedure no PostgreSQL
         with connection.cursor() as cursor:
             cursor.execute(
                 """
@@ -158,10 +154,8 @@ def criarUtilizadorBD(request):
                 [nif, id_tipo_utilizador, nome, morada, email, palavrapasse, datacriacao, estado]
             )
 
-        # Volta para a home com mensagem de sucesso
         return render(request, 'home.html', {'success': True})
 
-    # Caso não seja POST
     return render(request, 'home.html', {'success': False, 'error': 'Método inválido.'})
 
 #Função para mostrar os dados

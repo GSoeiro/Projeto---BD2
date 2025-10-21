@@ -10,10 +10,9 @@
         <h2>Automóveis</h2>
         <table border="1">
             <tr>
-                <th>ID</th>
+                <th>ID Automóvel</th>
                 <th>VIN</th>
-                <th>ID Seguradora</th>
-                <th>ID Utilizador</th>
+                <th>Nome Seguradora</th>
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Ano</th>
@@ -27,8 +26,7 @@
             <tr>
                 <td>{{ auto.id_automovel }}</td>
                 <td>{{ auto.vin }}</td>
-                <td>{{ auto.id_seguradora_id }}</td>
-                <td>{{ auto.id_utilizador_id }}</td> 
+                <td>{{ auto.id_seguradora.nome }}</td>
                 <td>{{ auto.marca }}</td>
                 <td>{{ auto.modelo }}</td>
                 <td>{{ auto.ano }}</td>
@@ -46,8 +44,8 @@
         <h2>Seguradoras</h2>
         <table border="1">
             <tr>
-                <th>ID</th>
-                <th>NIF</th>
+                <th>ID Seguradora</th>
+                <th>NIF Seguradora</th>
                 <th>Nome</th>
                 <th>Email</th>
             </tr>
@@ -66,9 +64,9 @@
         <h2>Faturas</h2>
         <table border="1">
             <tr>
-                <th>ID</th>
+                <th>ID Fatura</th>
                 <th>ID Venda</th>
-                <th>Data</th>
+                <th>Data Venda</th>
                 <th>Forma de Pagamento</th>
             </tr>
             {% for fat in faturas %}
@@ -102,7 +100,8 @@
         <h2>Utilizadores</h2>
         <table border="1">
             <tr>
-                <th>NIF</th>
+                <th>ID Utilizador</th>
+                <th>NIF Utilizador</th>
                 <th>ID Tipo Utilizador</th>
                 <th>Nome</th>
                 <th>Morada</th>
@@ -112,6 +111,7 @@
             </tr>
             {% for util in utilizadores %}
             <tr>
+                <td>{{ util.id_utilizador }}</td>
                 <td>{{ util.nif }}</td>
                 <td>{{ util.id_tipo_utilizador_id }}</td>
                 <td>{{ util.nome }}</td>

@@ -43,7 +43,7 @@ class Seguradora(models.Model):
 class Automovel(models.Model):
     id_automovel = models.AutoField(primary_key=True)
     vin = models.BigIntegerField(unique=True)
-    id_utilizador = models.ForeignKey(Utilizador, on_delete=models.PROTECT, db_column='id_utilizador')
+    id_utilizador = models.ForeignKey(Utilizador, on_delete=models.SET_NULL, null=True, blank=True, db_column='id_utilizador')
     id_seguradora = models.ForeignKey(Seguradora, on_delete=models.SET_NULL, null=True, blank=True, db_column='id_seguradora')
     marca = models.CharField(max_length=100)
     modelo = models.CharField(max_length=100)
